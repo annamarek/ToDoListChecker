@@ -31,5 +31,22 @@ namespace ToDoChecker_Pro.Controllers
 
             return Json(new { success = false, message = "Task not found." });
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(ToDoTask obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.ToDoTasks.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

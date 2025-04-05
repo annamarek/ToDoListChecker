@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ToDoChecker_Pro")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0b08ee923b2aab93b2f61f1d078d68a41dec942")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+15f5fc67d6f133fbf719490d64cc534ca2af6da2")]
 [assembly: System.Reflection.AssemblyProductAttribute("ToDoChecker_Pro")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ToDoChecker_Pro")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
