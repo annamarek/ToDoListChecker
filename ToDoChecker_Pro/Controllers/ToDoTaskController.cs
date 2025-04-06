@@ -48,5 +48,31 @@ namespace ToDoChecker_Pro.Controllers
             }
             return View();
         }
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            ToDoTask? task = _db.ToDoTasks.Find(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+            return View(task);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ToDoTask obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.ToDoTasks.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
     }
 }
