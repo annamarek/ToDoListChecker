@@ -35,12 +35,13 @@
         </tr>
     </thead>
     <tbody>
+        @{
+            int counter = 1;
+        }
         @foreach (var obj in Model)
         {
             <tr>
-                <td>
-                    @obj.Id
-                </td>
+                <td>@counter</td>
                 
                 @if (@obj.IsDone)
                 {
@@ -79,6 +80,7 @@
                         </svg>
                     </td>
                 }
+                counter++;
                 <td style="width: 210px;">
                         <a asp-controller="ToDoTask" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary btn-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">

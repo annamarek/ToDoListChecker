@@ -74,5 +74,32 @@ namespace ToDoChecker_Pro.Controllers
             return View();
         }
 
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            ToDoTask? task = _db.ToDoTasks.Find(id);
+            
+            if (task == null)
+            {
+                return NotFound();
+            }
+            return View(task);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int? id)
+        {
+            ToDoTask? obj = _db.ToDoTasks.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.ToDoTasks.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

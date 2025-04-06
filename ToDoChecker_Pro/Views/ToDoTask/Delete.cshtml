@@ -3,22 +3,21 @@
 <form method="post">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Edit new task</h2>
+            <h2 class="text-primary">Delete task</h2>
             <hr />
         </div>
         <div asp-validation-summary="ModelOnly"></div>
         <div class="mb-3 row">
             <label class="p-0">Task name</label>
-            <input asp-for="Name" type="text" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+            <input asp-for="Name" disabled class="form-control" />
         </div>
         <div class="form-check form-check-inline mb-3">
-            <input asp-for="IsDone" class="form-check-input" type="checkbox" />
+            <input asp-for="IsDone" disabled class="form-check-input" type="checkbox" />
             <label class="form-check-label" asp-for="IsDone">Task state</label>
         </div>
         <div class="row">
             <div class="col-6 col-md-3">
-                <button type="submit" class="btn btn-primary form-control" style="width:150px">Update</button>
+                <button type="submit" class="btn btn-danger form-control" style="width:150px">Delete</button>
             </div>
             <div class="col-6 col-md-3">
                 <a asp-controller="ToDoTask" asp-action="Index" class="btn btn-outline-secondary form-control" style="width:150px">Back to List</a>
