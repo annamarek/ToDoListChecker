@@ -44,6 +44,7 @@ namespace ToDoChecker_Pro.Controllers
             {
                 _db.ToDoTasks.Add(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Task was added successfully";
                 return RedirectToAction("Index");
             }
             return View();
@@ -69,6 +70,7 @@ namespace ToDoChecker_Pro.Controllers
             {
                 _db.ToDoTasks.Update(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Task was updated successfully";
                 return RedirectToAction("Index");
             }
             return View();
@@ -99,6 +101,7 @@ namespace ToDoChecker_Pro.Controllers
             }
             _db.ToDoTasks.Remove(obj);
             _db.SaveChanges();
+            TempData["success"] = "Task was deleted successfully";
             return RedirectToAction("Index");
         }
     }
