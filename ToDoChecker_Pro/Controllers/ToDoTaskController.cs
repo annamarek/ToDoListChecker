@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using ToDoChecker_Pro.Data;
 using ToDoChecker_Pro.Models;
 
@@ -7,14 +9,25 @@ namespace ToDoChecker_Pro.Controllers
     public class ToDoTaskController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public ToDoTaskController(ApplicationDbContext db)
+        private readonly UserManager<IdentityUser> _userManager;
+        public ToDoTaskController(ApplicationDbContext db, UserManager<IdentityUser> userManager)
         {
             this._db = db;
+            this._userManager = userManager;
         }
+        
+        //[Authorize]
         public IActionResult Index()
         {
-            List<ToDoTask> ToDoTasksList = _db.ToDoTasks.ToList();
-            return View(ToDoTasksList);
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = _userManager.GetUserId(User);
+                List<ToDoTask> ToDoTasksList = _db.ToDoTasks
+                    .Where(t => t.UserId == userId)
+                    .ToList();
+                return View(ToDoTasksList);
+            }
+            return PartialView("_LoginPartial");
         }
         [HttpPost]
         public IActionResult Ex([FromBody] int id)
@@ -42,6 +55,11 @@ namespace ToDoChecker_Pro.Controllers
         {
             if (ModelState.IsValid)
             {
+                obj.UserId = _userManager.GetUserId(User);
+
+                var userId = _userManager.GetUserId(User);
+                obj.UserId = userId;
+
                 _db.ToDoTasks.Add(obj);
                 _db.SaveChanges();
                 TempData["success"] = "Task was added successfully";
